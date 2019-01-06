@@ -72,10 +72,18 @@ public class Vet extends Person {
     }
 
     public Set<Visit> getVisits() {
-        return visits;
+        if (this.visits == null) {
+            this.visits = new HashSet<>();
+        }
+        return this.visits;
     }
 
     public void setVisits(Set<Visit> visits) {
         this.visits = visits;
+    }
+
+    @Override
+    public String toString() {
+        return getLastName();
     }
 }
