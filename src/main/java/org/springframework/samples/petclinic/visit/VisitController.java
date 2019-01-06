@@ -17,14 +17,15 @@ package org.springframework.samples.petclinic.visit;
 
 import org.springframework.samples.petclinic.owner.Pet;
 import org.springframework.samples.petclinic.owner.PetRepository;
-import org.springframework.samples.petclinic.visit.Visit;
-import org.springframework.samples.petclinic.visit.VisitRepository;
+import org.springframework.samples.petclinic.vet.Vet;
+import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -39,16 +40,23 @@ class VisitController {
 
     private final VisitRepository visits;
     private final PetRepository pets;
+    private final VetRepository vets;
 
 
-    public VisitController(VisitRepository visits, PetRepository pets) {
+    public VisitController(VisitRepository visits, PetRepository pets, VetRepository vets) {
         this.visits = visits;
         this.pets = pets;
+        this.vets = vets;
     }
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
+    }
+
+    @ModelAttribute("vets")
+    public Collection<Vet> getAllVets(){
+        return this.vets.findAll();
     }
 
     /**

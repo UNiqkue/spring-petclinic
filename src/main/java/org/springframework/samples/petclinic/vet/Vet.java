@@ -81,9 +81,4 @@ public class Vet extends Person {
     public void setVisits(Set<Visit> visits) {
         this.visits = visits;
     }
-
-    @Override
-    public String toString() {
-        return getLastName();
-    }
 }
