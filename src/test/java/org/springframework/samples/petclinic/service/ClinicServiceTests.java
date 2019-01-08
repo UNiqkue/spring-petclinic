@@ -206,10 +206,15 @@ public class ClinicServiceTests {
     @Transactional
     public void shouldAddNewVisitForPet() {
         Pet pet7 = this.pets.findById(7);
+
+        Vet vet = this.vets.findById(1);
+
         int found = pet7.getVisits().size();
         Visit visit = new Visit();
         pet7.addVisit(visit);
+
         visit.setDescription("test");
+        visit.setVet(vet);
         this.visits.save(visit);
         this.pets.save(pet7);
 
