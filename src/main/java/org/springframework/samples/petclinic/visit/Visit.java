@@ -49,6 +49,9 @@ public class Visit extends BaseEntity {
     @JoinColumn(name = "vet_id")
     private Vet vet;
 
+    @Column(name = "status")
+    private String status;
+
     /**
      * Creates a new instance of Visit for the current date
      */
@@ -86,5 +89,13 @@ public class Visit extends BaseEntity {
 
     public void setVet(Vet vet) {
         this.vet = vet;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -11,13 +11,13 @@ import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VetFormatter  implements Formatter<Vet> {
+public class VetFormatter implements Formatter<Vet> {
 
     private final VetRepository vets;
 
     @Autowired
     public VetFormatter(VetRepository vets) {
-        this.vets=vets;
+        this.vets = vets;
     }
 
     @Override

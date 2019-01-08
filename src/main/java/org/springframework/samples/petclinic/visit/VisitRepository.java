@@ -20,6 +20,8 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.repository.Repository;
 import org.springframework.samples.petclinic.model.BaseEntity;
+import org.springframework.samples.petclinic.owner.Pet;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repository class for <code>Visit</code> domain objects All method names are compliant with Spring Data naming
@@ -38,8 +40,16 @@ public interface VisitRepository extends Repository<Visit, Integer> {
      * @param visit the <code>Visit</code> to save
      * @see BaseEntity#isNew
      */
-    void save(Visit visit) throws DataAccessException;
+    void save(Visit visit);
 
+    /**
+     * Retrieve a {@link Visit} from the data store by id.
+     * @param id the id to search for
+     * @return the {@link Visit} if found
+     */
+    @Transactional(readOnly = true)
+    Visit findById(Integer id);
+
+    @Transactional(readOnly = true)
     List<Visit> findByPetId(Integer petId);
-
 }
