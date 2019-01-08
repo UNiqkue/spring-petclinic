@@ -43,15 +43,13 @@ public class VisitController {
     private final VisitRepository visits;
     private final PetRepository pets;
     private final VetRepository vets;
-    private final OwnerRepository owners;
     public static int ownerId;
 
 
-    public VisitController(VisitRepository visits, PetRepository pets, VetRepository vets, OwnerRepository owners) {
+    public VisitController(VisitRepository visits, PetRepository pets, VetRepository vets) {
         this.visits = visits;
         this.pets = pets;
         this.vets = vets;
-        this.owners = owners;
     }
 
     @InitBinder
@@ -67,7 +65,7 @@ public class VisitController {
     @ModelAttribute("pets")
     public Collection<Pet> getAllPets(@PathVariable("ownerId") int ownerId){
         VisitController.ownerId = ownerId;
-        return this.owners.findById(ownerId).getPets();
+        return this.pets.findByOwnerId(ownerId);
     }
 
     /**
@@ -115,7 +113,7 @@ public class VisitController {
     }
 
     @PostMapping("/owners/{ownerId}/pets/{petId}/visits/{visitId}/edit")
-    public String processUpdateVisitForm(@Valid Visit visit, BindingResult result, @PathVariable("visitId") int visitId) {
+    public String processUpdateVisitForm(@Valid Visit visit, @PathVariable("visitId") int visitId, BindingResult result) {
         visit.setId(visitId);
         visit.setStatus("active");
         if (result.hasErrors()) {

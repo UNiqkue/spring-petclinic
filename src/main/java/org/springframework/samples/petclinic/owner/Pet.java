@@ -64,8 +64,6 @@ public class Pet extends NamedEntity {
     @OneToMany(mappedBy = "petId", fetch = FetchType.EAGER)
     private Set<Visit> visits = new LinkedHashSet<>();
 
-//    private Integer ownerId = getOwnerId();
-
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
@@ -85,10 +83,6 @@ public class Pet extends NamedEntity {
     public Owner getOwner() {
         return this.owner;
     }
-
-//    public Integer getOwnerId(){
-//        return this.owner.getId();
-//    }
 
     protected void setOwner(Owner owner) {
         this.owner = owner;

@@ -14,12 +14,10 @@ import java.util.Locale;
 public class PetFormatter implements Formatter<Integer> {
 
     private final PetRepository pets;
-    private final OwnerRepository owners;
 
     @Autowired
-    public PetFormatter(PetRepository pets, OwnerRepository owners) {
+    public PetFormatter(PetRepository pets) {
         this.pets = pets;
-        this.owners = owners;
     }
 
     @Override
@@ -29,7 +27,7 @@ public class PetFormatter implements Formatter<Integer> {
 
     @Override
     public Integer parse(String value, Locale local) throws ParseException {
-        Collection<Pet> pets = this.owners.findById(VisitController.ownerId).getPets();
+        Collection<Pet> pets = this.pets.findByOwnerId(VisitController.ownerId);
         for (Pet i : pets) {
             if (i.getName().equals(value)) {
                 return i.getId();

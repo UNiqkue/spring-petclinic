@@ -86,9 +86,10 @@
                         </td>
                     </th:block>
                     <th:block th:if="${visit?.status!='active'}">
-                        <td style="color : indianred;" th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
-                        <td style="color : indianred;" th:text="${visit?.description}"></td>
-                        <td style="color : indianred;" th:text="${visit?.vet}"></td>
+                        <td class="canceled" th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
+                        <td class="canceled" th:text="${visit?.description}"></td>
+                        <td class="canceled" th:text="${visit?.vet}"></td>
+                        <td class="canceled-text">VISIT CANCELLED</td>
                     </th:block>
                 </tr>
                 <tr>
